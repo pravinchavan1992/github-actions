@@ -12,7 +12,7 @@ jobs:
         env:
           super_secret: ${{ secrets.TEST_SECRET }}
         run: |
-          example-command "$super_secret"
+          echo "$super_secret"
       
     
     
