@@ -19,5 +19,5 @@ jobs:
           SUPER_SECRET: ${{ secrets.TEST_SECRET }}
           ENV_SEC: ${{ secrets.ENV_VAR }}
         run: |
-          echo "Super Secret: $SUPER_SECRET"
-          echo "Env Sec: $ENV_SEC"
+          echo "Super Secret: ${{ secrets.TEST_SECRET }}"
+          echo "Env Sec: ${{ secrets.ENV_VAR }}"
