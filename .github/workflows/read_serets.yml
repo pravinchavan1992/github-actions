@@ -11,8 +11,10 @@ jobs:
       - name: Reading Secrets
         env:
           super_secret: ${{ secrets.TEST_SECRET }}
+          env_sec: $${{ secrets.ENV_VAR }}
         run: |
           echo "$super_secret"
+          echo "$env_sec"
       
     
     
