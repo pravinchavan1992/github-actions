@@ -1,20 +1,23 @@
 name: Read Secrets
 run-name: ${{ github.actor }} reading secrets 🚀
-on: workflow_dispatch
+
+on: 
+  workflow_dispatch:
+
 jobs:
   Reading-Secrets:
     runs-on: ubuntu-latest
-    steps: 
-      - run: echo "Job is triggerred by ${{ github.event_name }}"
+    steps:
+      - name: Show Trigger Info
+        run: echo "Job is triggered by ${{ github.event_name }}"
+
       - name: Checkout Repository
         uses: actions/checkout@v4
+
       - name: Reading Secrets
         env:
-          super_secret: ${{ secrets.TEST_SECRET }}
-          env_sec: $${{ secrets.ENV_VAR }}
+          SUPER_SECRET: ${{ secrets.TEST_SECRET }}
+          ENV_SEC: ${{ secrets.ENV_VAR }}
         run: |
-          echo "$super_secret"
-          echo "$env_sec"
-      
-    
-    
+          echo "Super Secret: $SUPER_SECRET"
+          echo "Env Sec: $ENV_SEC"
