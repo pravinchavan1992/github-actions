@@ -9,7 +9,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Reading Secrets
-        run: echo "Env secret is ${{ secrets.TEST_SECRET }}"
+        env:
+          super_secret: ${{ secrets.TEST_SECRET }}
+        run: |
+          example-command "$super_secret"
       
     
     
