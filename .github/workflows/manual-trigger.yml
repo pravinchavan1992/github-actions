@@ -1,0 +1,63 @@
+name: Manual Trigger Workflow
+run-name: ${{ github.actor }} triggered workflow
+
+on: 
+  workflow_dispatch:
+    inputs: 
+      input1: 
+        description: 'Manual Workflow'
+        required: true
+        type: choice
+        options:
+          - option 1
+          - option 2
+
+      input2: 
+        description: 'Text field'
+        required: true
+        type: boolean
+
+      input3: 
+        description: 'Text field'
+        required: true
+        type: string
+
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
+
+jobs:
+  RUN_WORKFLOW:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo event name
+        run: echo "${{ github.event_name }} is triggered"
+        
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Echo actor and repository
+        run: echo "${{ github.actor }} is in ${{ github.repository }}"
+
+      - name: Echo branch
+        run: echo "Branch is ${{ github.ref }}"
+
+      - name: List all files from repository
+        run: ls -la
+
+  Fetch_Input_Details:
+    runs-on: ubuntu-latest
+    needs: RUN_WORKFLOW
+    steps:
+      - name: Show input1
+        run: echo "Input 1 is ${{ inputs.input1 }}"
+        
+      - name: Show input2
+        run:  echo "Input 2 is ${{ inputs.input2 }}"
+        
+      - name: Show input3
+        run: echo "Input 3 is ${{ inputs.input3 }}"
+
+      - name: Show input4
+        run: echo "Input 4 is ${{ inputs.environment }}"
